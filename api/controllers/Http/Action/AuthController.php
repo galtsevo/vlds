@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Controllers;
+namespace App\controllers\Http\Action;
 
 use App\Models\User;
 use App\Requests\CustomRequestHandler;

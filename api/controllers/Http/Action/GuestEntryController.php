@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Controllers;
+namespace App\controllers\Http\Action;
 
-use App\Models\GuestEntry;
-use App\Requests\CustomRequestHandler;
-use App\Response\CustomResponse;
+use App\models\GuestEntry;
+use App\requests\CustomRequestHandler;
+use App\response\CustomResponse;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\RequestInterface as Request;
 use Respect\Validation\Validator as v;
-use App\Validation\Validator;
+use App\validation\Validator;
 
 
 

@@ -1,4 +1,9 @@
 version: "3.8"
+
+networks:
+  vlds_network:
+    driver: bridge
+
 services:
   db:
     image: mysql
@@ -7,10 +12,25 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: vlds
+    networks:
+      - vlds_network
     ports:
       - "3306:3306"
     volumes:
       - "./sql/dump.sql:/docker-entrypoint-initdb.d/dump.sql"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - db:db
+    ports:
+      - 8000:80
+    environment:
+      MYSQL_USER: user
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+    networks:
+      - vlds_network
 
   frontend:
     build:
@@ -19,6 +39,8 @@ services:
       - "8080:80"
     volumes:
       - ./frontend:/app
+    networks:
+      - vlds_network
 
   api:
     build:
