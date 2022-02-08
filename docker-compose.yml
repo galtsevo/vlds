@@ -1,5 +1,17 @@
 version: "3.8"
 services:
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: vlds
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./sql/dump.sql:/docker-entrypoint-initdb.d/dump.sql"
+
   frontend:
     build:
       context: frontend/docker/development/nginx
