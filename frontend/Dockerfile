@@ -1,6 +1,8 @@
-FROM node:12-alpine as builder
+FROM node:14-alpine as builder
 WORKDIR /app
-COPY package.json /app/package.json
-RUN npm install --only=prod
-COPY . /app
-RUN npm run build
+ENV PATH /app/node_modules/.bin:$PATH
+COPY package.json ./
+COPY package-lock.json ./
+RUN npm install
+COPY . ./
+CMD ["npm", "start"]
